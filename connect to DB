@@ -1,0 +1,70 @@
+package database;
+import java.sql.*;
+
+public class jdbcPrg {
+
+	public static void main(String[] args) throws SQLException {
+		
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		
+		
+		try {
+			//1.get a connection to database
+			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/AnimalsDB", "Student", "student");
+			
+					System.out.println("Database connection successful!\n");
+			
+			// 2. create a statement
+			myStmt = myConn.createStatement();
+			
+			
+			//call helper method to display the animal information
+			//System.out.println("AnimalDB");
+			//displayAnimal(myConn, "Gorilla", "Herbivour");
+			
+			//UPDATE the Animal
+			//System.out.println("\nEXECUTING THE UPDATE FOR: Gorilla mountain\n");
+			
+			// 3. insert a new animal
+			System.out.println("inserting a new animal to database\n");
+			// creates variable myStmt that updates database
+			//int rowsAffected = myStmt.executeUpdate(
+					//"insert into animal " + 
+			//"(name,species,habitat,diet) "  +
+							//"values " +
+			//"('horse' , 'mustang' , 'grass plains' , ' herbivours' , 10/12/14)");
+			
+					//"where species='lion' and habitat='savannah'");
+			
+			//Call helper method to display the animals information
+			//System.out.println("AFTER THE UPDATE...");
+			//displayanimal(myConn, "Gorilla", "herbivore");
+			
+
+			// 4. Verify by getting animal list
+			myRs = myStmt.executeQuery("select * from animal order by name");
+			
+			//5. process the result set
+			while (myRs.next()) {
+				System.out.println(myRs.getString("name") + " , " + myRs.getString("species"));
+		}//add a } here when running while loop
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+				
+			}
+		finally {
+			if (myRs != null) {
+				myRs.close();
+			}
+		}
+		}
+
+	private static void displayanimal(Connection myConn, String string, String string2) {
+		// TODO Auto-generated method stub
+		
+	  }		
+	}
+	
